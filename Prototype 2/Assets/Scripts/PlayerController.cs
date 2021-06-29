@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     private float speed = 30.0f;
     public int xPosition = 10;
     public GameObject cookie;
+    public float coolDown = 1f;
+    private float startCool = 0;
     
     void Update()
     {
@@ -21,7 +23,11 @@ public class PlayerController : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(cookie, transform.position, cookie.transform.rotation);
+            if(Time.time >= startCool + coolDown){
+                Instantiate(cookie, transform.position, cookie.transform.rotation);
+                startCool = Time.time;
+            }
+            
         }
     }
 }
